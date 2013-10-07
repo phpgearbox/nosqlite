@@ -1,38 +1,75 @@
 <?php
 ////////////////////////////////////////////////////////////////////////////////
-//           _______          _________       ____     __  __                   
-//           \      \   ____ /   _____/ _____|    |   |__|/  |_  ____           
-//           /   |   \ /  _ \\_____  \ / ____/    |   |  \   __\/ __ \          
-//          /    |    (  <_> )        < <_|  |    |___|  ||  | \  ___/          
-//          \____|__  /\____/_______  /\__   |_______ \__||__|  \___  >         
-//                  \/              \/    |__|       \/             \/          
+// __________ __             ________                   __________              
+// \______   \  |__ ______  /  _____/  ____ _____ ______\______   \ _______  ___
+//  |     ___/  |  \\____ \/   \  ____/ __ \\__  \\_  __ \    |  _//  _ \  \/  /
+//  |    |   |   Y  \  |_> >    \_\  \  ___/ / __ \|  | \/    |   (  <_> >    < 
+//  |____|   |___|  /   __/ \______  /\___  >____  /__|  |______  /\____/__/\_ \
+//                \/|__|           \/     \/     \/             \/            \/
 // =============================================================================
 //         Designed and Developed by Brad Jones <bj @="gravit.com.au" />        
 // =============================================================================
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace GravIT\NoSqLite;
+namespace Gears\NoSqLite;
 
+/**
+ * Class: \Gears\NoSqLite\Result
+ * =============================================================================
+ * This class represents a result set, returned by the read functionality.
+ */
 class Result extends \ArrayObject
 {
+	// TODO: Find out if this is really needed...
 	private $total_size;
 	
+	/**
+	 * Method: __construct
+	 * =========================================================================
+	 * This only seems to be here for the extra count functionality I seem to
+	 * have added. However I can not for the life of me remember why I added
+	 * this seemingly redundent code. That will teach for not documententing
+	 * this class.
+	 * 
+	 * Parameters:
+	 * -------------------------------------------------------------------------
+	 * $input - An array
+	 * 
+	 * Returns:
+	 * -------------------------------------------------------------------------
+	 * void
+	 */
 	public function __construct($input)
 	{
 		$this->total_size = count($input);
 		parent::__construct($input);
 	}
 	
+	// TODO: Find out if this is really needed...
 	public function count()
 	{
 		return $this->total_size;
 	}
 	
+	// TODO: Find out if this is really needed...
 	public function size()
 	{
 		return parent::count();
 	}
 	
+	/**
+	 * Method: skip
+	 * =========================================================================
+	 * This skips over records in the result set.
+	 * 
+	 * Parameters:
+	 * -------------------------------------------------------------------------
+	 * $value - How many records to skip.
+	 * 
+	 * Returns:
+	 * -------------------------------------------------------------------------
+	 * self
+	 */
 	public function skip($value)
 	{
 		if ($value > 0)
@@ -54,6 +91,19 @@ class Result extends \ArrayObject
 		return $this;
 	}
 	
+	/**
+	 * Method: limit
+	 * =========================================================================
+	 * This limits how many records we return in the result set.
+	 * 
+	 * Parameters:
+	 * -------------------------------------------------------------------------
+	 * $value - How many records to return.
+	 * 
+	 * Returns:
+	 * -------------------------------------------------------------------------
+	 * self
+	 */
 	public function limit($value)
 	{
 		if ($value > 0)
@@ -76,6 +126,21 @@ class Result extends \ArrayObject
 		return $this;
 	}
 	
+	/**
+	 * Method: distinct
+	 * =========================================================================
+	 * Finds the distinct values for a specified field across a single
+	 * collection. distinct returns a document that contains an array
+	 * of the distinct values.
+	 * 
+	 * Parameters:
+	 * -------------------------------------------------------------------------
+	 * $distinct_value - The field to collect distinct values from.
+	 * 
+	 * Returns:
+	 * -------------------------------------------------------------------------
+	 * The distinct values
+	 */
 	public function distinct($distinct_value)
 	{
 		$distinct_values = array();
@@ -110,6 +175,23 @@ class Result extends \ArrayObject
 		return $distinct_values;
 	}
 	
+	/**
+	 * Method: sort
+	 * =========================================================================
+	 * Controls the order that the query returns matching documents.
+	 * For each field in the sort document, if the field’s corresponding
+	 * value is positive, then sort() returns query results in ascending order
+	 * for that attribute. If the field’s corresponding value is negative,
+	 * then sort() returns query results in descending order.
+	 * 
+	 * Parameters:
+	 * -------------------------------------------------------------------------
+	 * $value - The sort query
+	 * 
+	 * Returns:
+	 * -------------------------------------------------------------------------
+	 * self
+	 */
 	public function sort($value)
 	{
 		$args = array();

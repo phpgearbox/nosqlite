@@ -1,20 +1,20 @@
 <?php
 ////////////////////////////////////////////////////////////////////////////////
-//           _______          _________       ____     __  __                   
-//           \      \   ____ /   _____/ _____|    |   |__|/  |_  ____           
-//           /   |   \ /  _ \\_____  \ / ____/    |   |  \   __\/ __ \          
-//          /    |    (  <_> )        < <_|  |    |___|  ||  | \  ___/          
-//          \____|__  /\____/_______  /\__   |_______ \__||__|  \___  >         
-//                  \/              \/    |__|       \/             \/          
+// __________ __             ________                   __________              
+// \______   \  |__ ______  /  _____/  ____ _____ ______\______   \ _______  ___
+//  |     ___/  |  \\____ \/   \  ____/ __ \\__  \\_  __ \    |  _//  _ \  \/  /
+//  |    |   |   Y  \  |_> >    \_\  \  ___/ / __ \|  | \/    |   (  <_> >    < 
+//  |____|   |___|  /   __/ \______  /\___  >____  /__|  |______  /\____/__/\_ \
+//                \/|__|           \/     \/     \/             \/            \/
 // =============================================================================
 //         Designed and Developed by Brad Jones <bj @="gravit.com.au" />        
 // =============================================================================
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace GravIT\NoSqLite;
+namespace Gears\NoSqLite;
 
 /**
- * Class: GravIT\NoSqLite\Db
+ * Class: Gears\NoSqLite\Db
  * =============================================================================
  * Takeaway: A NoSQL Database, with the portability of SQLite
  * 
@@ -43,8 +43,7 @@ class Db
 	 * $path string The path to the database.
 	 * 
 	 * $backend The backend we wish to use, this defaults to
-	 * \GravIT\NoSqLite\Backends\Json or which ever one we find is
-	 * fastest in our benchmarking.
+	 * \Gears\NoSqLite\Backends\Json
 	 * 
 	 * Throws:
 	 * -------------------------------------------------------------------------
@@ -73,7 +72,7 @@ class Db
 			else
 			{
 				// The one that was given is not of the correct type.
-				throw new \Exception('Backend class does not extend \GravIT\NoSqLite\Backends\Driver');
+				throw new \Exception('Backend class does not extend \Gears\NoSqLite\Backends\Driver');
 			}
 		}
 		
@@ -131,7 +130,8 @@ class Db
 	 * Method: c
 	 * =========================================================================
 	 * This provides the explicit interface for creating collections.
-	 * Handy if you need to supply the name of the collection as a string or array.
+	 * Handy if you need to supply the name of the collection as a string
+	 * or array.
 	 * 
 	 * Parameters:
 	 * -------------------------------------------------------------------------

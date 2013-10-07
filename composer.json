@@ -12,5 +12,6 @@
 	{
 		"psr-0": { "Gears\\NoSqLite\\": "" }
 	},
-	"target-dir": "Gears/NoSqLite"
+	"target-dir": "Gears/NoSqLite",
+	"suggest": { "gears/arrays": "You will be dealing with arrays lots so why not make your job a little easier." }
 }

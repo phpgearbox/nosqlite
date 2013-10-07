@@ -1,17 +1,17 @@
 <?php
 ////////////////////////////////////////////////////////////////////////////////
-//           _______          _________       ____     __  __                   
-//           \      \   ____ /   _____/ _____|    |   |__|/  |_  ____           
-//           /   |   \ /  _ \\_____  \ / ____/    |   |  \   __\/ __ \          
-//          /    |    (  <_> )        < <_|  |    |___|  ||  | \  ___/          
-//          \____|__  /\____/_______  /\__   |_______ \__||__|  \___  >         
-//                  \/              \/    |__|       \/             \/          
+// __________ __             ________                   __________              
+// \______   \  |__ ______  /  _____/  ____ _____ ______\______   \ _______  ___
+//  |     ___/  |  \\____ \/   \  ____/ __ \\__  \\_  __ \    |  _//  _ \  \/  /
+//  |    |   |   Y  \  |_> >    \_\  \  ___/ / __ \|  | \/    |   (  <_> >    < 
+//  |____|   |___|  /   __/ \______  /\___  >____  /__|  |______  /\____/__/\_ \
+//                \/|__|           \/     \/     \/             \/            \/
 // =============================================================================
 //         Designed and Developed by Brad Jones <bj @="gravit.com.au" />        
 // =============================================================================
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace GravIT\NoSqLite\Backends;
+namespace Gears\NoSqLite\Backends;
 
 /**
  * Abtract Class: GravIT\NoSqLite\Backends\Driver
@@ -178,7 +178,7 @@ abstract class Driver
 		}
 		
 		// Lets get some info about ourselves
-		$ip = str_replace('.', '', $_SERVER['SERVER_ADDR']);
+		$ip = str_replace('.', '', $this->getServerAddress());
 		$pid = getmypid();
 		
 		// Are there any old stale counters
@@ -208,6 +208,82 @@ abstract class Driver
 		$this->idfile = $this->path.'/.counters/'.$this->machineid;
 	}
 	
+	/**
+	 * Method: getServerAddress
+	 * =========================================================================
+	 * This method will retrive the servers ip address via CLI or the normal
+	 * $_SERVER["SERVER_ADDR"]
+	 * 
+	 * Parameters:
+	 * -------------------------------------------------------------------------
+	 * n/a
+	 * 
+	 * Throws:
+	 * -------------------------------------------------------------------------
+	 * n/a
+	 * 
+	 * Returns:
+	 * -------------------------------------------------------------------------
+	 * n/a
+	 */
+	private function getServerAddress()
+	{
+		if(isset($_SERVER["SERVER_ADDR"]))
+		{
+			return $_SERVER["SERVER_ADDR"];
+		}
+		else
+		{
+			// Running CLI
+			if(stristr(PHP_OS, 'WIN'))
+			{
+				//  Rather hacky way to handle windows servers
+				exec('ipconfig /all', $catch);
+				foreach($catch as $line)
+				{
+					if(eregi('IP Address', $line))
+					{
+						// Have seen exec return "multi-line" content, so another hack.
+						if(count($lineCount = split(':', $line)) == 1)
+						{
+							list($t, $ip) = split(':', $line);
+							$ip = trim($ip);
+						}
+						else
+						{
+							$parts = explode('IP Address', $line);
+							$parts = explode('Subnet Mask', $parts[1]);
+							$parts = explode(': ', $parts[0]);
+							$ip = trim($parts[1]);
+						}
+						
+						if(ip2long($ip > 0))
+						{
+							echo 'IP is '.$ip."\n";
+							return $ip;
+						}
+						else
+						{
+							// TODO: Handle this failure condition.
+						}
+					}
+				}
+			}
+			else
+			{
+				$ifconfig = shell_exec('/sbin/ifconfig');
+				preg_match_all('/inet ([\d\.]+)/', $ifconfig, $matches);
+				foreach ($matches[1] as $ip)
+				{
+					// Just pick the first one thats not localhost
+					if ($ip != '127.0.0.1')
+					{
+						return $ip;
+					}
+				}
+			}
+		}
+	}
 	/**
 	 * Method: genId
 	 * =========================================================================
@@ -420,8 +496,8 @@ abstract class Driver
 										// create it here.
 										$it = new \RecursiveIteratorIterator
 										(
-										new \RecursiveArrayIterator($data),
-										\RecursiveIteratorIterator::SELF_FIRST
+											new \RecursiveArrayIterator($data),
+											\RecursiveIteratorIterator::SELF_FIRST
 										);
 										
 										// We use this a few times so I wrapped it up here
@@ -682,7 +758,7 @@ abstract class Driver
 		}
 		
 		// Finally return the results
-		return new \GravIT\NoSqLite\Result($results);
+		return new \Gears\NoSqLite\Result($results);
 	}
 	
 	/**
