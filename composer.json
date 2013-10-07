@@ -12,6 +12,5 @@
 	{
 		"psr-0": { "Gears\\NoSqLite\\": "" }
 	},
-	"target-dir": "Gears/NoSqLite",
-	"archive": { "exclude": ["Example"] }
+	"target-dir": "Gears/NoSqLite"
 }
