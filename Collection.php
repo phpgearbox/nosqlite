@@ -218,6 +218,6 @@ class Collection
 	 */
 	public function exists()
 	{
-		return is_dir($this->path);
+		return is_dir($this->db->getRootPath().$this->path);
 	}
 }

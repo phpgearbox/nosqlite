@@ -25,6 +25,14 @@ namespace Gears\NoSqLite;
 class Db
 {
 	/**
+	 * Property: rootpath
+	 * =========================================================================
+	 * This stores the root path to our database.
+	 */
+	private $rootpath;
+	public function getRootPath() { return $this->rootpath; }
+	
+	/**
 	 * Property: backend
 	 * =========================================================================
 	 * This stores the backend driver class for the
@@ -55,6 +63,9 @@ class Db
 	 */
 	public function __construct($path, $backend = null)
 	{
+		// Set the rootpath
+		$this->rootpath = $path;
+		
 		// Do we have a custom backend
 		if ($backend == null)
 		{
@@ -77,7 +88,7 @@ class Db
 		}
 		
 		// Okay we have a backend, lets set the path to the data.
-		$this->backend->setPath($path);
+		$this->backend->setPath($this->rootpath);
 	}
 	
 	/**
