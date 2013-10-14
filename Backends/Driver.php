@@ -273,7 +273,7 @@ abstract class Driver
 			{
 				$ifconfig = shell_exec('/sbin/ifconfig');
 				preg_match_all('/inet (addr:)*([\d\.]+)/', $ifconfig, $matches);
-				foreach ($matches[1] as $ip)
+				foreach ($matches[2] as $ip)
 				{
 					// Just pick the first one thats not localhost
 					if ($ip != '127.0.0.1')
