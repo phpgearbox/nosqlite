@@ -7,7 +7,7 @@
 //  |____|   |___|  /   __/ \______  /\___  >____  /__|  |______  /\____/__/\_ \
 //                \/|__|           \/     \/     \/             \/            \/
 // =============================================================================
-//         Designed and Developed by Brad Jones <bj @="gravit.com.au" />        
+//          Designed and Developed by Brad Jones <brad @="bjc.id.au" />         
 // =============================================================================
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -28,7 +28,7 @@ class Result extends \ArrayObject
 	 * =========================================================================
 	 * This only seems to be here for the extra count functionality I seem to
 	 * have added. However I can not for the life of me remember why I added
-	 * this seemingly redundent code. That will teach for not documententing
+	 * this seemingly redundant code. That will teach for not documenting
 	 * this class.
 	 * 
 	 * Parameters:
