@@ -46,7 +46,7 @@ class Db
 	 * =========================================================================
 	 * Creates a new connection to the database
 	 * 
-	 * Paramaters:
+	 * Parameters:
 	 * -------------------------------------------------------------------------
 	 * $path string The path to the database.
 	 * 
@@ -97,7 +97,7 @@ class Db
 	 * This sets the special character used in the read syntax.
 	 * This defaults to nothing - eg: ''
 	 * 
-	 * Paramaters:
+	 * Parameters:
 	 * -------------------------------------------------------------------------
 	 * $value - the new value for the special characters
 	 * 

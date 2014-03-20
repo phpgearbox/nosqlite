@@ -23,7 +23,7 @@ class Collection
 	/**
 	 * Property: db
 	 * =========================================================================
-	 * This is where we keep our own copy of the database class, as a refrence.
+	 * This is where we keep our own copy of the database class, as a reference.
 	 */
 	private $db;
 	
@@ -141,6 +141,7 @@ class Collection
 	}
 	
 	// Alias method
+	// TODO: WTF Brad shouldn't this be an alias for create???
 	public function save($query = array(), $values = array())
 	{
 		return $this->read($query, $values);

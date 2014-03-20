@@ -92,12 +92,12 @@ echo "\n";
  * Section: UPDATE
  * =============================================================================
  * Next up is the "update" function. Basically this just does a read and then a
- * create automaically for you. The first array provided to the update function
+ * create automatically for you. The first array provided to the update function
  * is your search query, this is passed directly to the read function.
  * 
  * The second array is the values you want to update or add to the documents
  * that were matched by the read function. The data is modified and then written
- * back to their orignal files.
+ * back to their original files.
  * 
  * Example of SQL:
  * -----------------------------------------------------------------------------

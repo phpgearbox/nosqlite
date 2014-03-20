@@ -7,7 +7,7 @@
 //  |____|   |___|  /   __/ \______  /\___  >____  /__|  |______  /\____/__/\_ \
 //                \/|__|           \/     \/     \/             \/            \/
 // =============================================================================
-//         Designed and Developed by Brad Jones <bj @="gravit.com.au" />        
+//          Designed and Developed by Brad Jones <brad @="bjc.id.au" />         
 // =============================================================================
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -18,10 +18,10 @@ namespace Gears\NoSqLite\Backends;
  * =============================================================================
  * Xml Backend
  * 
- * Okay so it's not really XML, i cheated and just wrapped everything up in
+ * Okay so it's not really XML, I cheated and just wrapped everything up in
  * CDATA tags. So it's really just some simple regular expressions and string
  * manipulation. If you used simplexml or similar I am sure the overheads would
- * greater but someone may decide thats what they want, if so just write a
+ * be greater but someone may decide thats what they want, if so just write a
  * new driver. 
  */
 class Xml extends Driver

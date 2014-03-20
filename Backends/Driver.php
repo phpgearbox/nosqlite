@@ -7,14 +7,14 @@
 //  |____|   |___|  /   __/ \______  /\___  >____  /__|  |______  /\____/__/\_ \
 //                \/|__|           \/     \/     \/             \/            \/
 // =============================================================================
-//         Designed and Developed by Brad Jones <bj @="gravit.com.au" />        
+//          Designed and Developed by Brad Jones <brad @="bjc.id.au" />         
 // =============================================================================
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace Gears\NoSqLite\Backends;
 
 /**
- * Abtract Class: GravIT\NoSqLite\Backends\Driver
+ * Abtract Class: Gears\NoSqLite\Backends\Driver
  * =============================================================================
  * This provides some generic code that each backend class will use.
  * It also defines the abstract methods that the backend class must provide.
@@ -45,7 +45,7 @@ abstract class Driver
 	/**
 	 * Property: specialchar
 	 * =========================================================================
-	 * This is the special charcters used for any of the special read syntax.
+	 * This is the special characters used for any of the special read syntax.
 	 */
 	protected $specialchar = '';
 	public function setSpecialChar($value) { $this->specialchar = $value; }
@@ -54,7 +54,7 @@ abstract class Driver
 	 * Method: ext
 	 * =========================================================================
 	 * This must be defined by the backend class.
-	 * This will set the extention.
+	 * This will set the extension.
 	 * 
 	 * Parameters:
 	 * -------------------------------------------------------------------------
@@ -66,7 +66,7 @@ abstract class Driver
 	 * 
 	 * Returns:
 	 * -------------------------------------------------------------------------
-	 * This method should return the file extenion the database uses.
+	 * This method should return the file extension the database uses.
 	 */
 	abstract protected function ext();
 	
@@ -211,7 +211,7 @@ abstract class Driver
 	/**
 	 * Method: getServerAddress
 	 * =========================================================================
-	 * This method will retrive the servers ip address via CLI or the normal
+	 * This method will retrieve the servers ip address via CLI or the normal
 	 * $_SERVER["SERVER_ADDR"]
 	 * 
 	 * Parameters:
@@ -220,7 +220,7 @@ abstract class Driver
 	 * 
 	 * Throws:
 	 * -------------------------------------------------------------------------
-	 * n/a
+	 * - When an ip address can not be found on a windows host.
 	 * 
 	 * Returns:
 	 * -------------------------------------------------------------------------
@@ -264,7 +264,13 @@ abstract class Driver
 						}
 						else
 						{
-							// TODO: Handle this failure condition.
+							// TODO: Setup a new configurable property to allow
+							// us to manually set the IP address
+							throw new \Exception
+							(
+								'IP Address could not be determined .'
+								'automatically, please set this manually.'
+							);
 						}
 					}
 				}
@@ -284,6 +290,7 @@ abstract class Driver
 			}
 		}
 	}
+	
 	/**
 	 * Method: genId
 	 * =========================================================================
@@ -355,6 +362,7 @@ abstract class Driver
 	 * 
 	 * Throws:
 	 * -------------------------------------------------------------------------
+	 * - If a collection has not been defined.
 	 * - If a document already exists, this is a just in case precaution.
 	 * 
 	 * Returns:
@@ -413,7 +421,8 @@ abstract class Driver
 	 * 
 	 * Throws:
 	 * -------------------------------------------------------------------------
-	 * n/a
+	 * - If the collection has not been defined.
+	 * - If the collection does not exist.
 	 * 
 	 * Returns:
 	 * -------------------------------------------------------------------------
@@ -431,7 +440,11 @@ abstract class Driver
 			// Check that it actually exists
 			if (!is_dir($this->path.$collection))
 			{
-				throw new \Exception('The collection you have requested does not exist! path:'.$this->path.$collection);
+				throw new \Exception
+				(
+					'The collection you have requested does not exist!.'
+					'path:'.$this->path.$collection
+				);
 			}
 		}
 		
@@ -776,7 +789,9 @@ abstract class Driver
 	 * 
 	 * Throws:
 	 * -------------------------------------------------------------------------
-	 * n/a
+	 * - If the collection has not been defined.
+	 * - If the collection does not exist.
+	 * - The update failed to write the changes.
 	 * 
 	 * Returns:
 	 * -------------------------------------------------------------------------
@@ -870,7 +885,8 @@ abstract class Driver
 	 * 
 	 * Throws:
 	 * -------------------------------------------------------------------------
-	 * n/a
+	 * - If the collection does not exist.
+	 * - If the collection is not defined.
 	 * 
 	 * Returns:
 	 * -------------------------------------------------------------------------

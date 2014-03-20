@@ -7,7 +7,7 @@
 //  |____|   |___|  /   __/ \______  /\___  >____  /__|  |______  /\____/__/\_ \
 //                \/|__|           \/     \/     \/             \/            \/
 // =============================================================================
-//         Designed and Developed by Brad Jones <bj @="gravit.com.au" />        
+//          Designed and Developed by Brad Jones <brad @="bjc.id.au" />         
 // =============================================================================
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -19,7 +19,7 @@ namespace Gears\NoSqLite\Backends;
  * PHP Serialize Backend
  * 
  * This uses the built in PHP serialize and unserialize functions.
- * The cool thing with this is that you could potentioaly store not only
+ * The cool thing with this is that you could potentially store not only
  * arrays but objects as well. I'll leave you to ponder the possibilities...
  */
 class Serialize extends Driver
