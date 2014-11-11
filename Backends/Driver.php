@@ -268,7 +268,7 @@ abstract class Driver
 							// us to manually set the IP address
 							throw new \Exception
 							(
-								'IP Address could not be determined .'
+								'IP Address could not be determined '.
 								'automatically, please set this manually.'
 							);
 						}
@@ -442,7 +442,7 @@ abstract class Driver
 			{
 				throw new \Exception
 				(
-					'The collection you have requested does not exist!.'
+					'The collection you have requested does not exist! '.
 					'path:'.$this->path.$collection
 				);
 			}
